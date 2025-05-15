@@ -1,14 +1,14 @@
-import { swatch, fileIcon, logoShirt, stylishShirt } from "../assets";
+import { swatch, fileIcon, logoShirt, stylishShirt, linestshirt } from "../assets";
 
 export const EditorTabs = [
   {
     name: "colorpicker",
     icon: swatch,
   },
-  {
-    name: "filepicker",
-    icon: fileIcon,
-  }
+  // {
+  //   name: "filepicker",
+  //   icon: fileIcon,
+  // }
 ];
 
 export const FilterTabs = [
@@ -19,6 +19,10 @@ export const FilterTabs = [
   {
     name: "stylishShirt",
     icon: stylishShirt,
+  },
+  {
+    name: "textLines",
+    icon : linestshirt,
   },
 ];
 

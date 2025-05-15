@@ -1,137 +1,114 @@
-import { useState, useEffect, useRef } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { useSnapshot } from "valtio";
+/* Customizer.jsx */
+import { useState, useEffect, useRef } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useSnapshot } from 'valtio';
 
-import state from "../store";
-import { download } from "../assets";
-import { downloadCanvasToImage, reader } from "../config/helpers";
-import { EditorTabs, FilterTabs, DecalTypes } from "../config/constants";
-import { fadeAnimation, slideAnimation } from "../config/motion";
-import {
-  ColorPicker,
-  CustomButton,
-  FilePicker,
-  Tab,
-} from "../components";
+import state from '../store';
+import { download } from '../assets';
+import { downloadCanvasToImage } from '../config/helpers';
+import { EditorTabs, FilterTabs, DecalTypes } from '../config/constants';
+import { fadeAnimation, slideAnimation } from '../config/motion';
+import { ColorPicker, Tab } from '../components';
 
 const Customizer = () => {
   const snap = useSnapshot(state);
-  const [file, setFile] = useState("");
-  const [activeEditorTab, setActiveEditorTab] = useState("");
+  // console.log(snap.shirtText);
+  // const [file, setFile] = useState('');
+  const [activeEditorTab, setActiveEditorTab] = useState('');
   const [activeFilterTab, setActiveFilterTab] = useState({
     logoShirt: true,
     stylishShirt: false,
+    textLines: false, // new filter tab for text
   });
 
   const editorTabRef = useRef(null);
+useEffect(() => {
+  if (state.image) {
+    state.logoDecal = state.image;
+    state.isLogoTexture = true;
+  }
+}, [state.image]);
+useEffect(() => {
+  if (state.image) {
+    state.fullDecal = state.image;
+    state.isFullTexture = true;
+  }
+}, [state.image]);
 
-  // Closes the tab if clicked out
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (editorTabRef.current && !editorTabRef.current.contains(event.target)) {
-        setActiveEditorTab("");
+        setActiveEditorTab('');
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // show tab content depending on the activeTab, or close it if clicked again
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.altKey && e.key.toLowerCase() === 'q') {
+        state.intro = true;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   const generateTabContent = () => {
     switch (activeEditorTab) {
-      case "colorpicker":
+      case 'colorpicker':
         return <ColorPicker />;
-      case "filepicker":
-        return <FilePicker file={file} setFile={setFile} readFile={readFile} />;
       default:
         return null;
     }
   };
 
-  // Handles click on tab: opens tab or closes it if clicked again
   const handleTabClick = (tabName) => {
-    setActiveEditorTab((prevTab) => (prevTab === tabName ? "" : tabName)); // Toggle tab
-  };
-
-  const handleDecals = (type, result) => {
-    const decalType = DecalTypes[type];
-    state[decalType.stateProperty] = result;
-
-    if (!activeFilterTab[decalType.filterTab]) {
-      handleActiveFilterTab(decalType.filterTab);
-    }
+    setActiveEditorTab((prev) => (prev === tabName ? '' : tabName));
   };
 
   const handleActiveFilterTab = (tabName) => {
     switch (tabName) {
-      case "logoShirt":
+      case 'logoShirt':
         state.isLogoTexture = !activeFilterTab[tabName];
         break;
-      case "stylishShirt":
+      case 'stylishShirt':
         state.isFullTexture = !activeFilterTab[tabName];
+        break;
+      case 'textLines':
+        state.showText = !activeFilterTab[tabName];
         break;
       default:
         state.isLogoTexture = true;
         state.isFullTexture = false;
-        break;
+        state.showText = false;
     }
 
-    setActiveFilterTab((prevState) => ({
-      ...prevState,
-      [tabName]: !prevState[tabName],
+    setActiveFilterTab((prev) => ({
+      ...prev,
+      [tabName]: !prev[tabName],
     }));
-  };
-
-  const readFile = (type) => {
-    reader(file).then((result) => {
-      handleDecals(type, result);
-      setActiveEditorTab("");
-    });
   };
 
   return (
     <AnimatePresence>
       {!snap.intro && (
         <>
-          {/* left menu tabs */}
-          <motion.div
-            key="custom"
-            className="absolute top-0 left-0 z-10"
-            {...slideAnimation("left")}
-          >
+          <motion.div key="custom" className="absolute top-0 left-0 z-10" {...slideAnimation('left')}>
             <div className="flex items-center min-h-screen" ref={editorTabRef}>
               <div className="editortabs-container tabs">
                 {EditorTabs.map((tab) => (
-                  <Tab
-                    key={tab.name}
-                    tab={tab}
-                    handleClick={() => handleTabClick(tab.name)}
-                  />
+                  <Tab key={tab.name} tab={tab} handleClick={() => handleTabClick(tab.name)} />
                 ))}
-
                 {generateTabContent()}
               </div>
             </div>
           </motion.div>
 
-          {/* Go back button */}
-          <motion.div
-            className="absolute z-10 top-5 right-5"
-            {...fadeAnimation}
-          >
-            <CustomButton
-              type="filled"
-              title="Go Back"
-              handleClick={() => (state.intro = true)}
-              customStyles="w-fit px-4 py-2.5 font-bold text-sm"
-            />
-          </motion.div>
-
-          {/* filter tabs */}
-          <motion.div className="filtertabs-container" {...slideAnimation("up")}>
+          <motion.div className="filtertabs-container" {...slideAnimation('up')}>
             {FilterTabs.map((tab) => (
               <Tab
                 key={tab.name}
@@ -143,11 +120,7 @@ const Customizer = () => {
             ))}
 
             <button className="download-btn" onClick={downloadCanvasToImage}>
-              <img
-                src={download}
-                alt="Download Image"
-                className="w-3/5 h-3/5 object-contain"
-              />
+              <img src={download} alt="Download Image" className="w-3/5 h-3/5 object-contain" />
             </button>
           </motion.div>
         </>

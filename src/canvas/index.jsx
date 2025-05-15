@@ -1,5 +1,6 @@
+// canvas/index.jsx
 import { Canvas } from "@react-three/fiber";
-import { Environment, Center } from "@react-three/drei";
+import { Environment } from "@react-three/drei";
 
 import Shirt from "./Shirt";
 import Backdrop from "./Backdrop";
@@ -9,7 +10,7 @@ const CanvasModel = () => {
   return (
     <Canvas
       shadows
-      camera={{ position: [0, 0, 0], fov: 25 }} // fov = field of view
+      camera={{ position: [0, 0, 0], fov: 25 }}
       gl={{ preserveDrawingBuffer: true }}
       className="w-full max-w-full h-full transition-all ease-in"
     >
@@ -18,9 +19,10 @@ const CanvasModel = () => {
 
       <CameraRig>
         <Backdrop />
-        <Center>
+        {/* Use a fixed group instead of <Center> to prevent refitting on text toggle */}
+        <group position={[0, 0, 0]}>
           <Shirt />
-        </Center>
+        </group>
       </CameraRig>
     </Canvas>
   );

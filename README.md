@@ -44,12 +44,5 @@ To run this project locally:
 - `lint`: Run ESLint with specific rules for code quality.
 - `preview`: Preview the production build locally.
 
-## Credits
 
-- This project was developed using the three.js library (https://threejs.org/).
-- Design by Anderson Mancini, Paul Henschel.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
 

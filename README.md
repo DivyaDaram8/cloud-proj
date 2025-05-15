@@ -1,48 +1,41 @@
-# Customizable T-Shirt Design with three.js
+# Tee Studio - 3D T-Shirt Customizer
 
-Welcome to the Customizable T-Shirt Design project! This interactive web application allows users to create their own unique t-shirt designs by selecting different colors and uploading logo files. The project is built using the powerful three.js library for 3D rendering.
+Tee Studio is an interactive web-based 3D T-shirt customizer built with **React**, **Three.js**, **TailwindCSS**, and **Framer Motion**. Users can personalize shirts with colors, textures, logos, or custom text and download the final output.
 
-## Features
+🚀 **Live Demo:** [tee-studio.pages.dev](https://tee-studio.pages.dev/)
 
-- Choose from a variety of t-shirt colors.
-- Upload your own logo or design to be displayed on the t-shirt.
-- Preview your custom design in a 3D interactive environment.
-- Realistic lighting and shading effects powered by three.js.
+---
 
-## Demo
+## ✨ Features
 
-<!-- ![T-Shirt.js example](./public/demo.png) -->
+- 🎨 Real-time 3D shirt customization
+- 🖼 Upload logos or textures
+- 🧵 Add custom text
+- 🎯 Toggle logo/stylish/text shirt
+- 💾 Download final design as an image
+- ⌨ Keyboard shortcut: `Alt + Q` to go back to intro screen
 
-Check out the live demo of the Customizable T-Shirt Design application: [Demo](https://threejs-t-shirt.vercel.app/).
+---
 
-## Technologies Used
+## 🛠 Tech Stack
 
-- [React](https://reactjs.org/)
-- [Vite](https://vitejs.dev/)
-- [@react-three/drei](https://github.com/pmndrs/drei)
-- [@react-three/fiber](https://github.com/pmndrs/react-three-fiber)
-- [Framer Motion](https://www.framer.com/motion/)
-- [maath](https://github.com/gre/gl-matrix)
-- [react-color](https://casesandberg.github.io/react-color/)
-- [three.js](https://threejs.org/)
-- [valtio](https://github.com/pmndrs/valtio)
+- **React + Vite** for fast frontend dev
+- **Three.js** for 3D rendering
+- **TailwindCSS** for styling
+- **Framer Motion** for animations
+- **Valtio** for state management
 
-## Getting Started
+---
 
-To run this project locally:
+## 📦 Setup Instructions
 
-1. Clone this repository: `git clone https://github.com/your-username/customizable-tshirt.git`
-2. Navigate to the project directory: `cd customizable-tshirt`
-3. Install dependencies: `npm install`
-4. Run development server: `npm run dev`
-5. Open your web browser and visit `http://localhost:5173/`.
+```bash
+# Clone the repo
+git clone https://github.com/divyadaram8/cloud-proj.git
+cd cloud-proj
 
-## Scripts
+# Install dependencies
+npm install
 
-- `dev`: Start the development server.
-- `build`: Build the production-ready bundle.
-- `lint`: Run ESLint with specific rules for code quality.
-- `preview`: Preview the production build locally.
-
-
-
+# Start the development server
+npm run dev

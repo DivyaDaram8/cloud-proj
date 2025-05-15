@@ -68,7 +68,3 @@ Cloudflare Pages will build your app and deploy it. Your live site will be avail
 
 ---
 
-## 🌐 Live Demo
-
-Try the project live here:  
-[https://tee-studio.pages.dev/](https://tee-studio.pages.dev/)

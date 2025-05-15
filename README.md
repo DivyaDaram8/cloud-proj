@@ -41,7 +41,7 @@ npm install
 # Start the development server
 npm run dev
 ## 🚀 Deployment on Cloudflare Pages
-
+```
 To deploy your project live using Cloudflare Pages, follow these steps:
 
 1. Go to [Cloudflare Pages](https://pages.cloudflare.com/) and log in or create a free account.

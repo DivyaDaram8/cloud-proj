@@ -50,7 +50,11 @@ const Home = () => {
     <AnimatePresence>
       {snap.intro && (
         <motion.section className="home p-6 text-white" {...slideAnimation('left')}>
-          <h2 className="text-2xl font-bold mb-4 text-center">Customize Your Fit</h2>
+          <div className="mb-6 text-center">
+  <h2 className="text-2xl font-bold">Customize Your Fit</h2>
+  <p className="text-sm text-gray-300 mt-1">Press <kbd className="px-1 py-0.5 bg-gray-600 rounded">Alt + Q</kbd> to continue</p>
+</div>
+
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 max-w-md mx-auto">
             {/* Height */}

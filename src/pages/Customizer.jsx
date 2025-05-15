@@ -98,6 +98,14 @@ useEffect(() => {
       {!snap.intro && (
         <>
           <motion.div key="custom" className="absolute top-0 left-0 z-10" {...slideAnimation('left')}>
+              {/* Add the helper text absolutely positioned top-left inside this container */}
+<div className="absolute top-2 left-2 z-20">
+  <p className="text-sm text-gray-300 bg-gray-800 bg-opacity-60 px-3 py-1 rounded select-none whitespace-nowrap min-w-[220px]">
+    Press <kbd className="px-1 py-0.5 bg-gray-600 rounded">Alt + Q</kbd> to return
+  </p>
+</div>
+
+
             <div className="flex items-center min-h-screen" ref={editorTabRef}>
               <div className="editortabs-container tabs">
                 {EditorTabs.map((tab) => (
